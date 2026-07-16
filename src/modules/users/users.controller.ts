@@ -1,15 +1,17 @@
 import { Request, Response } from "express";
 import * as usersService from "./users.service.js";
+import {StatusCodes} from "http-status-codes";
+
 
 export async function list(req: Request, res: Response) {
   const users = await usersService.findAll();
-  res.json(users);
+  res.status(StatusCodes.OK).json(users);
 }
 
 export async function getOne(req: Request, res: Response) {
   const user = await usersService.findById(Number(req.params.id));
-  if (!user) return res.status(404).json({ error: "Usuário não encontrado" });
-  res.json(user);
+  if (!user) return res.status(StatusCodes.NOT_FOUND).json({ error: "Usuário não encontrado" });
+  res.status(StatusCodes.OK).json(user);
 }
 
 export async function create(req: Request, res: Response) {
