@@ -15,6 +15,8 @@ export async function findById(id: number): Promise<User | null> {
   return result.rows[0] ?? null;
 }
 
+
+
 export async function create(data: CreateUserInput): Promise<User> {
   const { name, email, phone, type } = data;
   const result = await pool.query(
