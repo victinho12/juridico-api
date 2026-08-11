@@ -9,6 +9,6 @@ router.get("/", asyncHandler(costumersController.list));
 router.get("/:id", asyncHandler(costumersController.getOne));
 router.post("/", asyncHandler(constumersValidador.createValidator) ,asyncHandler(costumersController.create));
 router.put("/:id", asyncHandler(constumersValidador.updateValidator), asyncHandler(costumersController.update));
-//   DELETE /:id       -> remover cliente
+router.delete("/:id", asyncHandler(constumersValidador.removeValidator), asyncHandler(costumersController.remove));
 
 export default router;

@@ -3,7 +3,7 @@ import { StatusCodes } from "http-status-codes";
 import {
   bodyValidationUpdate,
   bodyValidationCreate,
-} from "./costumers.squema.js";
+} from "./lawyers.squema.js";
 import * as yup from "yup";
 import { YupErrors } from "../../middlewares/yupError.js";
 
@@ -57,7 +57,6 @@ export const createValidator: RequestHandler = async (req, res, next) => {
   }
 };
 
-// costumer.validator.ts
 export const updateValidator: RequestHandler = async (req, res, next) => {
   try {
     const validatedId = await idParamSchema.validate(req.params, {

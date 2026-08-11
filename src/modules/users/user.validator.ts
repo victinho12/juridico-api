@@ -1,9 +1,6 @@
 import { RequestHandler } from "express";
 import { StatusCodes } from "http-status-codes";
-import {
-  bodyValidationUpdate,
-  bodyValidationCreate,
-} from "./costumers.squema.js";
+import { bodyValidationUpdate, bodyValidationCreate } from "./users.squema.js";
 import * as yup from "yup";
 import { YupErrors } from "../../middlewares/yupError.js";
 

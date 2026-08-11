@@ -1,11 +1,7 @@
-import { Request, RequestHandler, Response } from "express";
-import * as yup from "yup";
+import { Request, Response } from "express";
+
 import * as costumerService from "./costumers.service.js";
 import { StatusCodes } from "http-status-codes";
-import {
-  bodyValidationCreate,
-  bodyValidationUpdate,
-} from "./costumers.squema.js";
 
 export async function list(req: Request, res: Response) {
   const costumers = await costumerService.findAll();
@@ -18,26 +14,36 @@ export async function getOne(req: Request, res: Response) {
     return res.status(StatusCodes.BAD_REQUEST).json({ error: "ID inválido" });
   }
   const costumers = await costumerService.findById(id);
-  if (costumers === null) return res.status(StatusCodes.NOT_FOUND).send("Usuario não encontrado");
+  if (costumers === null)
+    return res.status(StatusCodes.NOT_FOUND).send("Usuario não encontrado");
   return res.status(StatusCodes.OK).json({ costumer: costumers });
 }
 
 export async function create(req: Request, res: Response) {
-    const costumer = await costumerService.create(req.body);
-    if(!costumer){
-    }
-     return res.status(StatusCodes.CREATED).send(costumer);
- 
+  const costumer = await costumerService.create(req.body);
+  return res.status(StatusCodes.CREATED).send(costumer);
 }
 
 // costumer.controller.ts
 export async function update(req: Request, res: Response) {
   const id = Number(req.params.id);
   const costumer = await costumerService.update(id, req.body); // já validado e filtrado
-
   if (!costumer) {
-    return res.status(StatusCodes.NOT_FOUND).json({ error: "Cliente não encontrado" });
+    return res
+      .status(StatusCodes.NOT_FOUND)
+      .json({ error: "Cliente não encontrado, digite um ID válido" });
   }
 
   return res.status(StatusCodes.OK).json(costumer);
+}
+
+export async function remove(req: Request, res: Response) {
+  const id = Number(req.params.id);
+  const success = await costumerService.remove(id);
+  if (!success) {
+    return res
+      .status(StatusCodes.NOT_FOUND)
+      .json({ error: "Cliente não encontrado, digite um ID válido" });
+  }
+  return res.status(StatusCodes.NO_CONTENT).send();
 }

@@ -31,6 +31,14 @@ export async function update(id: number, data: UpdateCostumersInput): Promise<Co
 
     const result = await pool.query(`UPDATE public.costumers
 	SET id_user=$1 , cpf=$2, date=$3, address=$4
-	WHERE id=$5 RETURNING*`, [merged.id_user, merged.cpf, merged.date, merged.address, id]);
+	WHERE id=$5 RETURNING*`, [merged.id_user, merged.cpf, merged.date, merged.address, id]); 
+
     return result.rows[0];
+}
+
+
+export async function remove(id: number): Promise<boolean> {
+    const result = await pool.query(`DELETE FROM public.costumers WHERE id=$1`, [id]);
+    console.log('result.rowCount:', result.rowCount);
+    return true;
 }
