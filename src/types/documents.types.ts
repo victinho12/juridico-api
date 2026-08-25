@@ -4,8 +4,8 @@ export type Documents = {
     name: string,
     file: File,
     status: string,
-    data_sed: Date,
-    data_ass: Date
+    date_sed: Date,
+    date_ass: Date
 };
 
 export type CreateDocument = Omit<Documents, "id">;
