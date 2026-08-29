@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import * as service from "./hearings.service.js";
 import * as serviceProcess from "../process/process.service.js";
 import { StatusCodes } from "http-status-codes";
+import { number } from "yup";
 
 export async function findAll(req: Request, res: Response) {
   const hearings = await service.findAll();
@@ -52,4 +53,12 @@ export async function update(req: Request, res: Response) {
   return res
     .status(StatusCodes.OK)
     .json({ message: "Update realizado com sucesso" });
+}
+
+
+export async function remove(req:Request,res:Response){
+    const id = Number(req.params.id);
+
+    const hearing = await service.remove(id);
+    return res.status(StatusCodes.OK).json({message: "Audiencia deletada com sucesso"});
 }

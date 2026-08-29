@@ -16,6 +16,6 @@ router.put("/:id", asyncHandler(validator.updateValidator), asyncHandler(control
 //   GET    /process/:id         -> listar audiências de um processo
 //   GET    /:id                 -> buscar uma audiência
 //   PUT    /:id                 -> atualizar audiência
-//   DELETE /:id                 -> remover audiência
+router.delete("/:id", asyncHandler(validator.removeValidator), asyncHandler(controller.remove));
 
 export default router;
