@@ -12,10 +12,16 @@ router.post(
   asyncHandler(validator.createValidator),
   asyncHandler(controller.create),
 );
-router.put("/:id", asyncHandler(validator.updateValidator), asyncHandler(controller.update));
-//   GET    /process/:id         -> listar audiências de um processo
-//   GET    /:id                 -> buscar uma audiência
-//   PUT    /:id                 -> atualizar audiência
-router.delete("/:id", asyncHandler(validator.removeValidator), asyncHandler(controller.remove));
+router.put(
+  "/:id",
+  asyncHandler(validator.updateValidator),
+  asyncHandler(controller.update),
+);
+router.delete(
+  "/:id",
+  asyncHandler(validator.removeValidator),
+  asyncHandler(controller.remove),
+);
 
+router.get("/:id", asyncHandler(controller.findById));
 export default router;
