@@ -3,7 +3,7 @@ export interface User {
   name: string;
   email: string;
   phone: string;
-  type: string;
+  password: string;
 }
 
 export type CreateUserInput = Omit<User, "id">;
